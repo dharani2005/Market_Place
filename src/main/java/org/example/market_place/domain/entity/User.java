@@ -1,4 +1,4 @@
-package org.example.market_place.entity;
+package org.example.market_place.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
