@@ -1,7 +1,10 @@
 package org.example.market_place.domain.dto;
 
 import lombok.*;
- @Getter
+
+import java.util.List;
+
+@Getter
  @Setter
  @AllArgsConstructor
  @NoArgsConstructor
@@ -9,5 +12,5 @@ import lombok.*;
  @Builder
  public class UserDTOView {
      private String email;
-
+     private List<ProductDTOForm> products;
 }

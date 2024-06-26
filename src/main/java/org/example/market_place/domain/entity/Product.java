@@ -26,7 +26,9 @@ public class Product {
     @Column
     private LocalDate expired;
 
-    @ManyToOne
+  @ManyToOne
     @JoinColumn(name ="email")
     private User user;
+
+
 }

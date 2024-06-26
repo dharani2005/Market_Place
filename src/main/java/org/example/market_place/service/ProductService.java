@@ -18,8 +18,8 @@ public interface ProductService {
     //delete the product by expiration date
     void deleteProductByExpired(LocalDate expired);
 
-    //find the product by user email and password
-    List<ProductDTOView>findByUserEmailAndPassword(UserDTOForm dtoForm);
+   /* //find the product by user email and password
+    List<ProductDTOView>findByUserEmailAndPassword(UserDTOForm dtoForm);*/
 
 
 

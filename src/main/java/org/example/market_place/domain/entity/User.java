@@ -26,6 +26,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Product> product = new ArrayList<>();
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public void addProduct(Product... products) {
         if (Objects.requireNonNull(products).length == 0)
             throw new IllegalArgumentException("products is empty");
@@ -33,20 +44,21 @@ public class User {
             this.product.add(product);
             if (product.getUser() != null) {
                 product.setUser(this);
+
+            }
+
+        }
+    }
+        public void removeProduct(Product... products) {
+            if (Objects.requireNonNull(products).length == 0)
+                throw new IllegalArgumentException("products is empty");
+            for (Product product : products) {
+                if (this.product.remove(product) && product.getUser() == this) {
+                    product.setUser(null);
+                }
+
             }
         }
 
     }
 
-    public void removeProduct(Product... products) {
-        if (Objects.requireNonNull(products).length == 0)
-            throw new IllegalArgumentException("products is empty");
-        for (Product product : products) {
-            if (this.product.remove(product) && product.getUser() == this) {
-                product.setUser(null);
-            }
-
-        }
-    }
-
-}

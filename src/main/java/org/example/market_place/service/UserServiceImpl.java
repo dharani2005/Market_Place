@@ -9,11 +9,19 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTOView register(UserDTOForm dtoForm) {
+        //Todo implementation
+        return null;
+    }
+
+    @Override
+    public UserDTOView findProductsByUserEmailAndPassword(String email, String password) {
+        //Todo implementation
         return null;
     }
 
     @Override
     public UserDTOView getByEmail(String email) {
+        //Todo implementation
         return null;
     }
 }

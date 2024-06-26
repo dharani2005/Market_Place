@@ -16,5 +16,4 @@ public class ProductDTOView {
     private String type;
     private Long price;
     private LocalDate expired;
-    private User user;
 }
