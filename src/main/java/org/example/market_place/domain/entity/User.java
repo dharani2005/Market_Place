@@ -12,7 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 @Entity
 public class User {
     @Id
@@ -31,13 +31,15 @@ public class User {
         this.password = password;
     }
 
+
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+
     }
 
-    public void addProduct(Product... products) {
+    public void addProduct(Product[] products) {
         if (Objects.requireNonNull(products).length == 0)
             throw new IllegalArgumentException("products is empty");
         for (Product product : products) {

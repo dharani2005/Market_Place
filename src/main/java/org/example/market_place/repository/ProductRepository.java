@@ -16,8 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceGreaterThanEqual(Long price);
 
     //Delete the product by expiration date
+//List<Product> deleteByExpired(LocalDate expired);
     void deleteByExpired(LocalDate localDate);
-
    /* //find products by user email and password
     @Query("select p from Product p join p.user u where u.email = :email and u.password = :password")
     List<Product> findByUserEmailAndPassword(@Param("email")String email,@Param("password") String password);*/

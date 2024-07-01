@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
+
 
 @Entity
 public class Product {
@@ -30,5 +32,16 @@ public class Product {
     @JoinColumn(name ="email")
     private User user;
 
+    public Product(String type, Long price, LocalDate expired) {
+        this.type = type;
+        this.price = price;
+        this.expired = expired;
+    }
 
+    public Product(Long id, String type, Long price, LocalDate expired) {
+        this.id = id;
+        this.type = type;
+        this.price = price;
+        this.expired = expired;
+    }
 }
