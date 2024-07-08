@@ -12,9 +12,9 @@ import java.util.List;
 public interface ProductService {
 
     //create the product
-   // ProductDTOView create(ProductDTOForm dtoForm);
+    ProductDTOView create(ProductDTOForm dtoForm);
 
-    void createWithUser(List<ProductDTOForm> productDTOForms, User user);
+    List<ProductDTOView> createWithUser(List<ProductDTOForm> productDTOForms, User user);
 
     ProductDTOView createUser(ProductDTOForm dtoForm, User user);
 

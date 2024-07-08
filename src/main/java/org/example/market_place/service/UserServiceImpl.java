@@ -1,5 +1,6 @@
 package org.example.market_place.service;
 
+import jakarta.transaction.Transactional;
 import org.example.market_place.converter.ProductConverter;
 import org.example.market_place.converter.UserConverter;
 import org.example.market_place.domain.dto.UserDTOForm;
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public UserDTOView register(UserDTOForm dtoForm) {
         //check parameters
         if(dtoForm == null) throw new IllegalArgumentException("dtoForm cannot be null");

@@ -1,5 +1,6 @@
 package org.example.market_place.service;
 
+import jakarta.transaction.Transactional;
 import org.example.market_place.converter.ProductConverter;
 import org.example.market_place.domain.dto.ProductDTOForm;
 import org.example.market_place.domain.dto.ProductDTOView;
@@ -23,13 +24,16 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public void createWithUser(List<ProductDTOForm> productDTOForms, User user) {
+    @Transactional
+    public List<ProductDTOView> createWithUser(List<ProductDTOForm> productDTOForms, User user) {
+        List<ProductDTOView> productDTOViews = new ArrayList<>();
         for (ProductDTOForm productDTOForm : productDTOForms) {
-            createUser(productDTOForm, user);
+           productDTOViews.add(createUser(productDTOForm, user));
         }
+        return productDTOViews;
     }
 
-   /* @Override
+    @Override
     public ProductDTOView create(ProductDTOForm dtoForm) {
         if(dtoForm == null) throw new IllegalArgumentException("dtoForm can  not be null");
         Product product = new Product(dtoForm.getId(), dtoForm.getType(), dtoForm.getPrice(), dtoForm.getExpired());
@@ -41,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
                 .expired(savedProduct.getExpired())
                 .build();
 
-    }*/
+    }
 
     @Override
     public ProductDTOView createUser(ProductDTOForm dtoForm, User user) {
