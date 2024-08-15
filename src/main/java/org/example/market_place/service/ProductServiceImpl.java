@@ -34,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTOView create(ProductDTOForm dtoForm) {
         if(dtoForm == null) throw new IllegalArgumentException("dtoForm can  not be null");
         Product product = new Product(dtoForm.getId(), dtoForm.getType(), dtoForm.getPrice(), dtoForm.getExpired());
@@ -48,6 +49,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public ProductDTOView createUser(ProductDTOForm dtoForm, User user) {
         if(dtoForm == null) throw new IllegalArgumentException("dtoForm can  not be null");
         Product product = new Product(dtoForm.getId(), dtoForm.getType(), dtoForm.getPrice(), dtoForm.getExpired());
@@ -63,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<ProductDTOView> findProductsByPriceGreaterThanEqual(Long price) {
         if(price < 0) throw new IllegalArgumentException("Price must be greater than zero");
         List<Product> products = productRepository.findByPriceGreaterThanEqual(price);
@@ -71,6 +74,7 @@ public class ProductServiceImpl implements ProductService {
                .collect(Collectors.toList());
     }
     @Override
+    @Transactional
     public ProductDTOView toProductView(Product entity) {
         return ProductDTOView.builder()
                 .id(entity.getId())
@@ -82,6 +86,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void deleteProductByExpired(LocalDate expired) {
         if(expired == null) throw new IllegalArgumentException("Expired cannot be null");
 

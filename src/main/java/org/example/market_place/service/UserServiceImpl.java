@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public UserDTOView findProductsByUserEmailAndPassword(String email, String password) {
     //check the parameters
         if(email == null || password == null) throw new IllegalArgumentException("email and password cannot be null");
@@ -97,6 +98,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional
     public UserDTOView getByEmail(String email) {
          User user = userRepository.findById(email).orElseThrow(() -> new DataNotFoundException("Email does not exists"));
         //Todo implementation
