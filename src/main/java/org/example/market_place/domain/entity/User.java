@@ -17,7 +17,6 @@ import java.util.Objects;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String email;
     @Column
     private String name;
