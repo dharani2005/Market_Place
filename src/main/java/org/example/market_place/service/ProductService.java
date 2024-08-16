@@ -14,9 +14,9 @@ public interface ProductService {
     //create the product
     ProductDTOView create(ProductDTOForm dtoForm);
 
-    List<ProductDTOView> createWithUser(List<ProductDTOForm> productDTOForms, User user);
+    //List<ProductDTOView> createWithUser(List<ProductDTOForm> productDTOForms, User user);
 
-    ProductDTOView createUser(ProductDTOForm dtoForm, User user);
+    //ProductDTOView createUser(ProductDTOForm dtoForm, User user);
 
     //Filter the product by price
     List<ProductDTOView> findProductsByPriceGreaterThanEqual(Long price);
@@ -24,7 +24,9 @@ public interface ProductService {
     ProductDTOView toProductView(Product entity);
 
     //delete the product by expiration date
-    void deleteProductByExpired(LocalDate expired);
+    boolean deleteProductByExpired();
+
+    ProductDTOView addProductToUser(String email , ProductDTOForm dtoForm);
 
    /* //find the product by user email and password
     List<ProductDTOView>findByUserEmailAndPassword(UserDTOForm dtoForm);*/

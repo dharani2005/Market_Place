@@ -11,8 +11,8 @@ public interface UserService {
     //Find user by email
     UserDTOView getByEmail(String email);
 
-    //Find products by user email and password
-    UserDTOView findProductsByUserEmailAndPassword(String email, String password);
+    //Find user by user email and password
+    UserDTOView findUserByEmailAndPassword(String email, String password);
 
 
 }

@@ -13,6 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 @Builder
+
 @Entity
 public class User {
     @Id
@@ -24,7 +25,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Product> product = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public User(String email, String password) {
         this.email = email;
@@ -38,12 +39,12 @@ public class User {
         this.password = password;
 
     }
-
+    //Helper methods for adding and removing products
     public void addProduct(Product[] products) {
         if (Objects.requireNonNull(products).length == 0)
             throw new IllegalArgumentException("products is empty");
         for (Product product : products) {
-            this.product.add(product);
+            this.products.add(product);
             if (product.getUser() != null) {
                 product.setUser(this);
 
@@ -55,7 +56,7 @@ public class User {
             if (Objects.requireNonNull(products).length == 0)
                 throw new IllegalArgumentException("products is empty");
             for (Product product : products) {
-                if (this.product.remove(product) && product.getUser() == this) {
+                if (this.products.remove(product) && product.getUser() == this) {
                     product.setUser(null);
                 }
 

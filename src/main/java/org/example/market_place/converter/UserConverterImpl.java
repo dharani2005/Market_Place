@@ -16,26 +16,37 @@ public class UserConverterImpl implements UserConverter {
     ProductConverter productConverter;
     @Override
     public UserDTOView toUserDto(User entity) {
-       /* return UserDTOView.builder()
+        if (entity == null) {
+            return null;
+        }
+        return UserDTOView.builder()
                 .email(entity.getEmail())
-                .products(entity.) */
-        List<ProductDTOView> products = new ArrayList<>();
+                .username(entity.getName())
+                .build();
+       /* List<ProductDTOView> products = new ArrayList<>();
         for(Product p : entity.getProduct())
         {
          products.add(productConverter.toProductView(p));
         }
-        return new UserDTOView(entity.getEmail(), products);
+        return new UserDTOView(entity.getEmail(), products);*/
     }
 
     @Override
     public User toUserEntity(UserDTOView dto) {
-        List<Product> products = new ArrayList<>();
+        if (dto == null) {
+            return null;
+        }
+        return User.builder()
+                .email(dto.getEmail())
+                .name(dto.getUsername())
+                .build();
+        /*List<Product> products = new ArrayList<>();
         for(ProductDTOView p : dto.getProducts())
         {
             products.add(productConverter.toProductEntity(p));
         }
         return User.builder()
                 .email(dto.getEmail())
-                .product(products).build();
+                .product(products).build();*/
     }
 }

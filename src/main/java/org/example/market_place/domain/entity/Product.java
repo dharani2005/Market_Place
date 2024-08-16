@@ -26,6 +26,9 @@ public class Product {
     private Long price;
 
     @Column
+    private LocalDate creationDate;
+
+    @Column
     private LocalDate expired;
 
   @ManyToOne
@@ -43,5 +46,9 @@ public class Product {
         this.type = type;
         this.price = price;
         this.expired = expired;
+    }
+    public void prePersist() {
+        creationDate = LocalDate.now();
+        expired = creationDate.plusDays(30);
     }
 }

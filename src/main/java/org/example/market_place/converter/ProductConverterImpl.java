@@ -26,6 +26,7 @@ public class ProductConverterImpl implements ProductConverter {
                 .id(entity.getId())
                 .price(entity.getPrice())
                 .type(entity.getType())
+                .creationDate(entity.getCreationDate())
                 .expired(entity.getExpired())
                 .build();
         //return new ProductDTOView(entity.getId(), entity.getType(), entity.getPrice(), entity.getExpired());
