@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<ProductDTOView> create(@RequestBody ProductDTOForm productDTOForms) {
+    public ResponseEntity<ProductDTOView> create(@RequestBody   @Valid ProductDTOForm productDTOForms) {
         System.out.println("DTO Form: " + productDTOForms );
         ProductDTOView createdProducts = productService.create(productDTOForms);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProducts);
@@ -38,6 +38,12 @@ public class ProductController {
     public ResponseEntity<List<ProductDTOView>> doFindProductsByPriceGreaterThanEqual(@RequestParam Long price) {
         List<ProductDTOView> products = productService.findProductsByPriceGreaterThanEqual(price);
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/user-products")
+    public ResponseEntity<List<ProductDTOView>> doFindProductsByUserEmailAndPassword(@RequestParam  @Valid String email, @RequestParam String password) {
+        System.out.println("Find advertisement by User email and password: " + email + password);
+        List<ProductDTOView> products = productService.findProductsByUserEmailAndPassword(email, password);
+        return ResponseEntity.ok(products);
     }
 
     @PostMapping("/add-to-user")

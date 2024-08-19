@@ -13,6 +13,8 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByUser_Email(String email);
 
+    List<Product> findByUser_EmailAndUser_Password(String email, String password);
+
     List<Product> findAllByExpiredAfter(LocalDate now);
 
     List<Product> findAllByExpiredBefore(LocalDate now);
@@ -23,8 +25,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     //Delete the product by expiration date
     //List<Product> deleteByExpired(LocalDate expired);
     void deleteByExpired(LocalDate localDate);
-   /* //find products by user email and password
-    @Query("select p from Product p join p.user u where u.email = :email and u.password = :password")
+
+    //find products by user email and password
+   /* @Query("select p from Product p join p.user u where u.email = :email and u.password = :password")
     List<Product> findByUserEmailAndPassword(@Param("email")String email,@Param("password") String password);*/
 
 }

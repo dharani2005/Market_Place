@@ -16,8 +16,6 @@ import java.time.LocalDate;
 @Builder
 
 public class ProductDTOForm {
-    @NotNull(message = "ID is required.")
-    private Long id;
 
     @NotBlank(message = "Type is required..")
     @Size(min = 10, max = 100)

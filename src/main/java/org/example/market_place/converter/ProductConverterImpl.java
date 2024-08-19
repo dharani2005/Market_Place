@@ -46,7 +46,6 @@ public class ProductConverterImpl implements ProductConverter {
     public Product toProductEntity(ProductDTOForm dto) {
 
         return Product.builder()
-                .id(dto.getId())
                 .price(dto.getPrice())
                 .type(dto.getType())
                 .expired(dto.getExpired())

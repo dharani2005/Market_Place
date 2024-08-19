@@ -154,6 +154,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDTOView> findProductsByUserEmailAndPassword(String email, String password) {
+      List<Product> products = productRepository.findByUser_EmailAndUser_Password(email, password);
+        return products.stream().map(this::toProductView).collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional
     public boolean deleteProductByExpired() {
         List<Product> expiredProducts = productRepository.findAllByExpiredAfter(LocalDate.now());

@@ -35,6 +35,12 @@ public class UserController {
         UserDTOView responseBody = userService.getByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
+    @GetMapping("/authenticate")
+    public ResponseEntity<UserDTOView>authenticateUser(@RequestBody @Valid UserDTOForm dtoForm){
+        System.out.println("Authenticate DTO Form: " + dtoForm);
+        UserDTOView responseBody = userService.authenticateUser(dtoForm);
+        return ResponseEntity.status(HttpStatus.FOUND).body(responseBody);
+    }
     @GetMapping("/user")
     public ResponseEntity<UserDTOView> doFindUserByEmailAndPassword(@RequestParam @Valid String email,@RequestParam @Valid String password){
         System.out.println("Email: " + email);

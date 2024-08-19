@@ -21,6 +21,8 @@ public interface ProductService {
     //Filter the product by price
     List<ProductDTOView> findProductsByPriceGreaterThanEqual(Long price);
 
+    List<ProductDTOView> findProductsByUserEmailAndPassword(String email, String  password);
+
     ProductDTOView toProductView(Product entity);
 
     //delete the product by expiration date

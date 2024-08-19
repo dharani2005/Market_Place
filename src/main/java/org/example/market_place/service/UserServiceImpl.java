@@ -7,6 +7,7 @@ import org.example.market_place.domain.dto.UserDTOForm;
 import org.example.market_place.domain.dto.UserDTOView;
 import org.example.market_place.domain.entity.Product;
 import org.example.market_place.domain.entity.User;
+import org.example.market_place.exception.AuthenticationException;
 import org.example.market_place.exception.DataDuplicateException;
 import org.example.market_place.exception.DataNotFoundException;
 import org.example.market_place.repository.ProductRepository;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
     private ProductConverter productConverter;
+    private CustomPasswordEncoder customPasswordEncoder;
 
     private UserConverter userConverter;
 
@@ -109,9 +111,24 @@ public class UserServiceImpl implements UserService{
               User user = userRepository.findByEmailAndPassword(email, password).get();
               return userConverter.toUserDto(user);
           }
-        return null;
+        throw new DataNotFoundException("Invalid email or password");
     }
 
+    @Override
+    @Transactional
+    public UserDTOView authenticateUser(UserDTOForm dtoForm) {
+        // Check for null parameters
+        if (dtoForm == null) throw new IllegalArgumentException("dtoForm cannot be null");
+        // Find the user by email
+        User user = userRepository.findByEmail(dtoForm.getEmail())
+                .orElseThrow(() -> new DataNotFoundException("Invalid email or password"));
+        // Check if the password matches
+        if (customPasswordEncoder.matches(dtoForm.getPassword(), user.getPassword())) {
+            return userConverter.toUserDto(user);
+        } else {
+            throw new AuthenticationException("Invalid email or password");
+        }
+    }
     @Override
     @Transactional
     public UserDTOView getByEmail(String email) {
